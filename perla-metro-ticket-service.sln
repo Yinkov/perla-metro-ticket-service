@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "perla-metro-ticket-service", "perla-metro-ticket-service.csproj", "{BD0F157F-B28A-EA7E-CF09-7435DF22E399}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BD0F157F-B28A-EA7E-CF09-7435DF22E399}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD0F157F-B28A-EA7E-CF09-7435DF22E399}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD0F157F-B28A-EA7E-CF09-7435DF22E399}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD0F157F-B28A-EA7E-CF09-7435DF22E399}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {74FD44D9-CEA3-40AF-BC4D-D5F97D85993D}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "On4CRcHz0DXiGKqxyX9CGWCRM5egkWDJrrTVa4WfxlM=",
+  "Source": "perla-metro-ticket-service",
+  "BasePath": "_content/perla-metro-ticket-service",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
