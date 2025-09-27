@@ -31,3 +31,12 @@ C:\yin\4-UCN-4\10-Decimo Semestre\Arquitectura de sistemas\Talleres\taller 1\per
 C:\yin\4-UCN-4\10-Decimo Semestre\Arquitectura de sistemas\Talleres\taller 1\perla-metro-ticket-service\obj\Debug\net8.0\perla-metro-ticket-service.pdb
 C:\yin\4-UCN-4\10-Decimo Semestre\Arquitectura de sistemas\Talleres\taller 1\perla-metro-ticket-service\obj\Debug\net8.0\perla-metro-ticket-service.genruntimeconfig.cache
 C:\yin\4-UCN-4\10-Decimo Semestre\Arquitectura de sistemas\Talleres\taller 1\perla-metro-ticket-service\obj\Debug\net8.0\ref\perla-metro-ticket-service.dll
+C:\yin\4-UCN-4\10-Decimo Semestre\Arquitectura de sistemas\Talleres\taller 1\perla-metro-ticket-service\bin\Debug\net8.0\DnsClient.dll
+C:\yin\4-UCN-4\10-Decimo Semestre\Arquitectura de sistemas\Talleres\taller 1\perla-metro-ticket-service\bin\Debug\net8.0\MongoDB.Bson.dll
+C:\yin\4-UCN-4\10-Decimo Semestre\Arquitectura de sistemas\Talleres\taller 1\perla-metro-ticket-service\bin\Debug\net8.0\MongoDB.Driver.dll
+C:\yin\4-UCN-4\10-Decimo Semestre\Arquitectura de sistemas\Talleres\taller 1\perla-metro-ticket-service\bin\Debug\net8.0\SharpCompress.dll
+C:\yin\4-UCN-4\10-Decimo Semestre\Arquitectura de sistemas\Talleres\taller 1\perla-metro-ticket-service\bin\Debug\net8.0\Snappier.dll
+C:\yin\4-UCN-4\10-Decimo Semestre\Arquitectura de sistemas\Talleres\taller 1\perla-metro-ticket-service\bin\Debug\net8.0\ZstdSharp.dll
+C:\yin\4-UCN-4\10-Decimo Semestre\Arquitectura de sistemas\Talleres\taller 1\perla-metro-ticket-service\obj\Debug\net8.0\perla-metro-ticket-service.sourcelink.json
+C:\yin\4-UCN-4\10-Decimo Semestre\Arquitectura de sistemas\Talleres\taller 1\perla-metro-ticket-service\bin\Debug\net8.0\DotNetEnv.dll
+C:\yin\4-UCN-4\10-Decimo Semestre\Arquitectura de sistemas\Talleres\taller 1\perla-metro-ticket-service\bin\Debug\net8.0\Sprache.dll
