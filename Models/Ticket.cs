@@ -14,7 +14,7 @@ namespace perla_metro_ticket_service.Models
         [BsonRepresentation(BsonType.ObjectId)]
         public string? Id { get; set; }
         public required string  IdUser { get; set; }
-        public DateTime issueDate { get; set; }
+        public DateTime issueDate { get; set; } = DateTime.Now;
         public TicketType Type { get; set; }
         public TicketState State { get; set; } = TicketState.Activo;
         public decimal Price { get; set; }
