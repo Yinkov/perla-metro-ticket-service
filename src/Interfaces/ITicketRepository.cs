@@ -12,7 +12,7 @@ namespace perla_metro_ticket_service.src.Interfaces
         Task<List<Ticket>> GetAll();
         Task<Ticket> GetById(string id);
         Task<List<Ticket>> GetByIdUser(string idUser);
-        Task<bool> Update(Ticket ticket);
+        Task<bool> Update(string id,Ticket ticket);
         Task<bool> DeleteSoft(string id); 
     }
 }
