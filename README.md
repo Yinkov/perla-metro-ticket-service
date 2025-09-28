@@ -48,14 +48,17 @@ El servicio requiere un archivo `.env` en la raíz del proyecto con la configura
 Crear una cuenta en MongoDB Atlas.
 
 Crear un Cluster.
+
   Al momento de crearlo se le solicuta confirmar un usuario y contraseña, estan son importantes para más adelante
 
 En el cluster, ir a la sección Database → Connect → Connect to your application.
+
   Presionar la opcion driver.
 
 Seleccionar driver:[C#/.NET] versión: [2.25 or later].
 
 Copiar el string de conexión que tendrá el formato similar a:
+
 mongodb+srv://<user>:<password>@base-ticket-service.y9rcn0b.mongodb.net/?retryWrites=true&w=majority&appName=Base-Ticket-Service
 
 Reemplazar <user> y <password> por los que configuraste en Atlas al momento de hacer el cluster.
@@ -65,11 +68,14 @@ Las variable DATABASE_NAME y COLECTION_TICKET_NAME son para nombrar la base de d
 
 # Ejecución del proyecto
 Abrir la cmd en alguna carpeta de conveniencia
+
 1. Clonar el repositorio
+   
 git clone https://github.com/Yinkov/perla-metro-ticket-service.git
+
 cd perla-metro-ticket-service
 
-2. Restaurar dependencias
+3. Restaurar dependencias
 
 En la carpeta del proyecto, ejecutar:
 
@@ -133,6 +139,7 @@ Price siempre debe ser mayor a 0.
 Type solo acepta "Ida" o "Vuelta".
 
 State solo acepta "Activo", "Usado" o "Caducado".
+
 
 
 
