@@ -35,7 +35,7 @@ perla_metro_ticket_service/
 
 ## Configuración del entorno
 
-El servicio requiere un archivo `.env` en la raíz del proyecto con la configuración de conexión a MongoDB Atlas:
+El servicio requiere un archivo `.env` en la raíz del proyecto con la configuración de conexión a MongoDB Atlas, este archivo debe contener 3 variable:
 
 `DATABASE_URL=mongodb+srv://<user>:<password>@base-ticket-service.y9rcn0b.mongodb.net/?retryWrites=true&w=majority&appName=Base-Ticket-Service`
 
@@ -133,6 +133,7 @@ Price siempre debe ser mayor a 0.
 Type solo acepta "Ida" o "Vuelta".
 
 State solo acepta "Activo", "Usado" o "Caducado".
+
 
 
 
