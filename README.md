@@ -16,22 +16,32 @@ En este repositorio solo se encuentra el **servicio de tickets**. La **Main API*
 
 ## 📂 Estructura básica
 perla_metro_ticket_service/
+
 │── Controllers/ # Endpoints de la API
+
 │── Models/ # Entidades y enums
+
 │── Dtos/ # Data Transfer Objects
+
 │── Repositories/ # Repositorios y acceso a datos
+
 │── Mappers/ # Mappers para pasar de dtos a modelo
+
 │── Interfaces/ # Interfaces de repositorios
+
 │── Program.cs # Configuración principal
+
 │── README.md # Este archivo
 
 ## Configuración del entorno
 
 El servicio requiere un archivo `.env` en la raíz del proyecto con la configuración de conexión a MongoDB Atlas:
 
-`DATABASE_URL=mongodb+srv://<user>:<password>@base-ticket-service.y9rcn0b.mongodb.net/?retryWrites=true&w=majority&appName=Base-Ticket-Service
-DATABASE_NAME=<nombre-de-la-base>
-COLECTION_TICKET_NAME=<nombre-de-la-coleccion>`
+`DATABASE_URL=mongodb+srv://<user>:<password>@base-ticket-service.y9rcn0b.mongodb.net/?retryWrites=true&w=majority&appName=Base-Ticket-Service`
+
+`DATABASE_NAME=<nombre-de-la-base>`
+
+`COLECTION_TICKET_NAME=<nombre-de-la-coleccion>`
 
 # Pasos para configurar MongoDB Atlas
 
@@ -123,6 +133,7 @@ Price siempre debe ser mayor a 0.
 Type solo acepta "Ida" o "Vuelta".
 
 State solo acepta "Activo", "Usado" o "Caducado".
+
 
 
 
