@@ -62,7 +62,9 @@ Copiar el string de conexión que tendrá el formato similar a:
 mongodb+srv://<user>:<password>@base-ticket-service.y9rcn0b.mongodb.net/?retryWrites=true&w=majority&appName=Base-Ticket-Service
 
 Reemplazar <user> y <password> por los que configuraste en Atlas al momento de hacer el cluster.
+
 Guardar ese string en el .env en la variable DATABASE_URL.
+
 Las variable DATABASE_NAME y COLECTION_TICKET_NAME son para nombrar la base de datos y la coleccion respectivamente, estas pueden tener cualquier nombre
 
 
@@ -90,15 +92,25 @@ dotnet run
 en la cmd vera algo como:
 
 info: Microsoft.Hosting.Lifetime[14]
+
       Now listening on: http://localhost:5192
+      
 info: Microsoft.Hosting.Lifetime[0]
+
       Application started. Press Ctrl+C to shut down.
+      
 info: Microsoft.Hosting.Lifetime[0]
+
       Hosting environment: Development
+      
 info: Microsoft.Hosting.Lifetime[0]
+
       Content root path: C:\yin\4-UCN-4\10-Decimo Semestre\Arquitectura de sistemas\Talleres\pREUBA DE FUNCI AAA\perla-metro-ticket-service
+      
 warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]
+
       Failed to determine the https port for redirect.
+      
 info: Microsoft.Hosting.Lifetime[0]
 
 ir a http://localhost:5192/swagger
@@ -139,6 +151,7 @@ Price siempre debe ser mayor a 0.
 Type solo acepta "Ida" o "Vuelta".
 
 State solo acepta "Activo", "Usado" o "Caducado".
+
 
 
 
