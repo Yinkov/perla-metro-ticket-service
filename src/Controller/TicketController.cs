@@ -25,7 +25,7 @@ namespace perla_metro_ticket_service.src.Controller
         }
 
 
-        [HttpPost]
+        [HttpPost("/Add")]
         public async Task<IActionResult> AddTicket([FromForm] AddTicketDto addTicketDto)
         {
             try
@@ -57,7 +57,7 @@ namespace perla_metro_ticket_service.src.Controller
 
         }
 
-        [HttpGet]
+        [HttpGet("/GetAllTickets")]
         public async Task<IActionResult> GetAllTicket()
         {
 
@@ -70,7 +70,7 @@ namespace perla_metro_ticket_service.src.Controller
             return Ok(tickets);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("/Get/{id}")]
         public async Task<IActionResult> GetTicket(string id)
         {
             var ticket = await _ticketRepository.GetById(id);
@@ -84,7 +84,7 @@ namespace perla_metro_ticket_service.src.Controller
             return Ok(ticket);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("/Update/{id}")]
         public async Task<IActionResult> UpdateTicket(string id,[FromForm] UpdateTicket updateTicket)
         {
             if (!ModelState.IsValid)
@@ -110,7 +110,7 @@ namespace perla_metro_ticket_service.src.Controller
 
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("/Delete/{id}")]
         public async Task<IActionResult> DeleteTicket(string id)
         {
             var ticket = await _ticketRepository.GetById(id);
