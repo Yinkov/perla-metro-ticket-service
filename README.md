@@ -122,7 +122,7 @@ el numero puede variar
 
 Cuando el servicio esté corriendo, puedes acceder a Swagger en:
 
- https://localhost:<numero>/swagger
+ https://localhost: <numero> /swagger
 
 Ahí encontrarás los endpoints para:
 
@@ -151,6 +151,7 @@ Price siempre debe ser mayor a 0.
 Type solo acepta "Ida" o "Vuelta".
 
 State solo acepta "Activo", "Usado" o "Caducado".
+
 
 
 
