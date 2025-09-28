@@ -29,8 +29,7 @@ perla_metro_ticket_service/
 
 El servicio requiere un archivo `.env` en la raíz del proyecto con la configuración de conexión a MongoDB Atlas:
 
-`env
-DATABASE_URL=mongodb+srv://<user>:<password>@base-ticket-service.y9rcn0b.mongodb.net/?retryWrites=true&w=majority&appName=Base-Ticket-Service
+`DATABASE_URL=mongodb+srv://<user>:<password>@base-ticket-service.y9rcn0b.mongodb.net/?retryWrites=true&w=majority&appName=Base-Ticket-Service
 DATABASE_NAME=<nombre-de-la-base>
 COLECTION_TICKET_NAME=<nombre-de-la-coleccion>`
 
@@ -66,10 +65,10 @@ En la carpeta del proyecto, ejecutar:
 
 dotnet restore
 
-3. Compilar el proyecto
 Añadir a la carpeta que se creo [perla-metro-ticket-service] el archivo .env preparado anteriormente
 
 4. Ejecutar el servicio
+
 dotnet run
 
 en la cmd vera algo como:
@@ -124,5 +123,6 @@ Price siempre debe ser mayor a 0.
 Type solo acepta "Ida" o "Vuelta".
 
 State solo acepta "Activo", "Usado" o "Caducado".
+
 
 
