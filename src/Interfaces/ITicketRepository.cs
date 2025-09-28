@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using perla_metro_ticket_service.Models;
+using perla_metro_ticket_service.src.Dtos.Ticket;
 
 namespace perla_metro_ticket_service.src.Interfaces
 {
@@ -12,7 +13,7 @@ namespace perla_metro_ticket_service.src.Interfaces
         Task<List<Ticket>> GetAll();
         Task<Ticket> GetById(string id);
         Task<List<Ticket>> GetByIdUser(string idUser);
-        Task<bool> Update(string id,Ticket ticket);
+        Task<bool> Update(string id,UpdateTicket  ticket);
         Task<bool> DeleteSoft(string id); 
     }
 }

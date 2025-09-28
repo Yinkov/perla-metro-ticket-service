@@ -2,41 +2,51 @@ using MongoDB.Driver;
 using DotNetEnv;
 using perla_metro_ticket_service.Models;
 using perla_metro_ticket_service.Models.Enums;
+using perla_metro_ticket_service.src.Interfaces;
+using perla_metro_ticket_service.src.Repositories;
+using MongoDB.Bson.Serialization.Conventions;
+using MongoDB.Bson;
+using System.Text.Json.Serialization;
+
 var builder = WebApplication.CreateBuilder(args);
 
 Env.Load();
 
+builder.Services
+    .AddControllers()
+    .AddJsonOptions(options =>
+    {
+        // Esto hace que ASP.NET acepte y serialice enums como string
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    });
+
+var pack = new ConventionPack
+{
+    new EnumRepresentationConvention(BsonType.String)
+};
+ConventionRegistry.Register("EnumAsString", pack, t => true);
+
 string linkDb = Environment.GetEnvironmentVariable("DATABASE_URL") ?? "mongodb+srv://<UserName>:<Contraseña>@base-ticket-service.y9rcn0b.mongodb.net/?retryWrites=true&w=majority&appName=Base-Ticket-Service";
 string nameDb = Environment.GetEnvironmentVariable("DATABASE_NAME") ?? "Data-base-ticket-service";
-string nameColection = Environment.GetEnvironmentVariable("COLECTION_TICKET_NAME") ?? "ticket";
+
 MongoClient mongoClient = new MongoClient(linkDb);
 
-var database1 = mongoClient.GetDatabase(nameDb);
-var collection = database1.GetCollection<Ticket>(nameColection);
+var database = mongoClient.GetDatabase(nameDb);
 
 
-await collection.InsertOneAsync(new Ticket {
-    IdUser = "aaaaaa",
-    issueDate = DateTime.Now,
-    Type = TicketType.Ida,
-    State = TicketState.Activo,
-    Price = 1200.50m
-});
 
-
-List<String> databases = mongoClient.ListDatabaseNames().ToList();
-
-foreach (string database in databases)
-{
-    
-    Console.WriteLine(database);
-    
-}
-
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddSingleton(database);
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
+builder.Services.AddScoped<ITicketRepository, TicketRepository>();
+
+
+
+
+
 
 var app = builder.Build();
 
@@ -50,6 +60,10 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 
+app.UseCors("AllowSpecificOrigin");
+app.UseAuthentication();
+app.UseAuthorization();
+app.MapControllers();
 
 
 app.Run();

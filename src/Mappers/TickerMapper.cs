@@ -19,16 +19,6 @@ namespace perla_metro_ticket_service.src.Mappers
             };
         }
 
-        public static Ticket ToModel(this UpdateTicket updateTicket)
-        {
-            return new Ticket
-            {
-                IdUser = string.Empty,
-                issueDate = updateTicket.issueDate,
-                Type = updateTicket.Type,
-                State = updateTicket.State,
-                Price = updateTicket.Price
-            };
-        }
+      
     }
 }

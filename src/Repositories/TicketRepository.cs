@@ -2,9 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DotNetEnv;
 using MongoDB.Driver;
 using perla_metro_ticket_service.Models;
+using perla_metro_ticket_service.src.Dtos.Ticket;
 using perla_metro_ticket_service.src.Interfaces;
+using perla_metro_ticket_service.Models.Enums;
 
 namespace perla_metro_ticket_service.src.Repositories
 {
@@ -14,7 +17,9 @@ namespace perla_metro_ticket_service.src.Repositories
 
         public TicketRepository(IMongoDatabase database)
         {
-            _tickets = database.GetCollection<Ticket>("Tickets");
+            
+            string nameColection = Environment.GetEnvironmentVariable("COLECTION_TICKET_NAME") ?? "ticket";
+            _tickets = database.GetCollection<Ticket>(nameColection);
 
             var indexKeys = Builders<Ticket>.IndexKeys
             .Ascending(t => t.IdUser)
@@ -23,12 +28,15 @@ namespace perla_metro_ticket_service.src.Repositories
             var indexOptions = new CreateIndexOptions
             {
                 Unique = true,
-                Name = "ux_ticket_user_date"    
+                Name = "ux_ticket_user_date"
             };
 
             var indexModel = new CreateIndexModel<Ticket>(indexKeys, indexOptions);
 
             _tickets.Indexes.CreateOne(indexModel);
+
+        
+
         }
 
         public async Task<Ticket> Add(Ticket ticket)
@@ -60,37 +68,64 @@ namespace perla_metro_ticket_service.src.Repositories
         public async Task<List<Ticket>> GetAll()
         {
           
-            var result =  await _tickets.Find(t => t.isActive).ToListAsync(); //poner t => t.isActive
+            var result =  await _tickets.Find(t => t.isActive).ToListAsync(); 
             return result;
         }
 
         public async Task<Ticket> GetById(string id)
         {
-            var filter = Builders<Ticket>.Filter.Eq(t => t.Id, id); //poner t => t.isActive
+            var filter = Builders<Ticket>.Filter.And(
+                Builders<Ticket>.Filter.Eq(t => t.Id, id),
+                Builders<Ticket>.Filter.Eq(t => t.isActive, true)
+            );
             var result =  await _tickets.Find(filter).FirstOrDefaultAsync();
             return result;
         }
 
         public async Task<List<Ticket>> GetByIdUser(string idUser)
         {
-            var filter = Builders<Ticket>.Filter.Eq(t => t.IdUser, idUser); //poner t => t.isActive
+            var filter = Builders<Ticket>.Filter.And(
+                Builders<Ticket>.Filter.Eq(t => t.IdUser, idUser),
+                Builders<Ticket>.Filter.Eq(t => t.isActive, true)); 
             var result =  await _tickets.Find(filter).ToListAsync();
             return result;
         }
 
-        public async Task<bool> Update(string id, Ticket ticket)
+        public async Task<bool> Update(string id, UpdateTicket ticket)
         {
-            var filter = Builders<Ticket>.Filter.Eq("_id", id); //poner t => t.isActive
-
-            var combinedUpdate = Builders<Ticket>.Update.Combine(
-                Builders<Ticket>.Update.Set("Type", ticket.Type),
-                Builders<Ticket>.Update.Set("State", ticket.State),
-                Builders<Ticket>.Update.Set("issueDate", ticket.issueDate),
-                Builders<Ticket>.Update.Set("Price", ticket.Price)
+            var filter = Builders<Ticket>.Filter.And(
+                Builders<Ticket>.Filter.Eq(t => t.Id, id),
+                Builders<Ticket>.Filter.Eq(t => t.isActive, true)
             );
-            var result = await _tickets.UpdateOneAsync(filter, combinedUpdate);
 
-            return result.ModifiedCount > 0; 
+            var updates = new List<UpdateDefinition<Ticket>>();
+
+            if (ticket.Type.HasValue)
+                updates.Add(Builders<Ticket>.Update.Set(t => t.Type, ticket.Type.Value));
+
+            if (ticket.State.HasValue)
+                updates.Add(Builders<Ticket>.Update.Set(t => t.State, ticket.State.Value));
+
+            if (ticket.issueDate.HasValue)
+                updates.Add(Builders<Ticket>.Update.Set(t => t.issueDate, ticket.issueDate.Value));
+
+            if (ticket.Price.HasValue)
+                updates.Add(Builders<Ticket>.Update.Set(t => t.Price, ticket.Price.Value));
+
+            if (!updates.Any())
+                return false; // No hay nada que actualizar
+
+            var combinedUpdate = Builders<Ticket>.Update.Combine(updates);
+
+            try
+            {
+                var result = await _tickets.UpdateOneAsync(filter, combinedUpdate);
+                return result.ModifiedCount > 0;
+            }
+            catch (MongoWriteException ex) when (ex.WriteError.Category == ServerErrorCategory.DuplicateKey)
+            {
+                throw new InvalidOperationException("Error: El usuario ya tiene un ticket en esa fecha.", ex);
+            }
         }
     }
 }

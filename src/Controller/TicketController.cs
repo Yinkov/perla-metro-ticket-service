@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
+using perla_metro_ticket_service.Models.Enums;
 using perla_metro_ticket_service.src.Dtos.Ticket;
 using perla_metro_ticket_service.src.Interfaces;
 using perla_metro_ticket_service.src.Mappers;
@@ -29,6 +30,10 @@ namespace perla_metro_ticket_service.src.Controller
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
                 /* Preguntar al main api si existe el user
                 var userId = 
                 if (userId == null)
@@ -37,16 +42,13 @@ namespace perla_metro_ticket_service.src.Controller
                 }
                 */
                 // Validar modelo inicial
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(ModelState);
-                }
+
 
                 var newTicket = addTicketDto.ToModel();
 
-                await _ticketRepository.Add(newTicket);
+                var ticket = await _ticketRepository.Add(newTicket);
 
-                return Ok("Ticker añadido exitosamente.");
+                return Ok(new { message = "Ticket añadido exitosamente", ticket});
             }
             catch (Exception ex)
             {
@@ -60,41 +62,62 @@ namespace perla_metro_ticket_service.src.Controller
         {
 
             var tickets = await _ticketRepository.GetAll();
+            if (tickets.Count == 0)
+            {
+                return NotFound("No hay tickets actualmente");
+            }
 
             return Ok(tickets);
         }
 
-        [HttpGet]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetTicket(string id)
         {
-
             var ticket = await _ticketRepository.GetById(id);
+            if (ticket == null)
+            {
+                return NotFound("El ticket no existe");
+            }
+
+            
 
             return Ok(ticket);
         }
 
-        [HttpPut]
-        public async Task<IActionResult> UpdateTicket(string id, UpdateTicket updateTicket)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateTicket(string id,[FromForm] UpdateTicket updateTicket)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             var ticket = await _ticketRepository.GetById(id);
             if (ticket != null)
             {
-                var ticketToUpdate = updateTicket.ToModel();
-                var result = await _ticketRepository.Update(id, ticketToUpdate);
+                if (ticket.State.Equals(TicketState.Caducado) && updateTicket.State.Equals(TicketState.Activo))
+                {
+                    return BadRequest("No se puede Activar un ticket Caducado");
+                }
+                var result = await _ticketRepository.Update(id, updateTicket);
                 if (result)
                 {
                     return Ok("El ticket se actulizo exitosamente");
                 }
                 return BadRequest("No se pudo actualizar el ticket");
             }
-            return BadRequest("El ticke no existe");
+            return NotFound("El ticke no existe");
             
 
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTicket(string id)
         {
+            var ticket = await _ticketRepository.GetById(id);
+            if (ticket == null)
+            {
+                return NotFound("El ticket no existe");
+            }
             
             var result = await _ticketRepository.DeleteSoft(id);
             if (result)
