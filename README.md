@@ -59,9 +59,9 @@ Seleccionar driver:[C#/.NET] versión: [2.25 or later].
 
 Copiar el string de conexión que tendrá el formato similar a:
 
-mongodb+srv://<user>:<password>@base-ticket-service.y9rcn0b.mongodb.net/?retryWrites=true&w=majority&appName=Base-Ticket-Service
+mongodb+srv://**user**:**password**@base-ticket-service.y9rcn0b.mongodb.net/?retryWrites=true&w=majority&appName=Base-Ticket-Service
 
-Reemplazar <user> y <password> por los que configuraste en Atlas al momento de hacer el cluster.
+Reemplazar **user** y **password** por los que configuraste en Atlas al momento de hacer el cluster.
 
 Guardar ese string en el .env en la variable DATABASE_URL.
 
@@ -122,7 +122,7 @@ el numero puede variar
 
 Cuando el servicio esté corriendo, puedes acceder a Swagger en:
 
- https://localhost: numero /swagger
+ https://localhost:**numero**/swagger
 
 Ahí encontrarás los endpoints para:
 
@@ -151,6 +151,7 @@ Price siempre debe ser mayor a 0.
 Type solo acepta "Ida" o "Vuelta".
 
 State solo acepta "Activo", "Usado" o "Caducado".
+
 
 
 
