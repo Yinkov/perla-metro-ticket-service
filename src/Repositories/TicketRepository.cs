@@ -60,27 +60,27 @@ namespace perla_metro_ticket_service.src.Repositories
         public async Task<List<Ticket>> GetAll()
         {
           
-            var result =  await _tickets.Find(t => t.isActive).ToListAsync();
+            var result =  await _tickets.Find(t => t.isActive).ToListAsync(); //poner t => t.isActive
             return result;
         }
 
         public async Task<Ticket> GetById(string id)
         {
-            var filter = Builders<Ticket>.Filter.Eq(t => t.Id, id);
+            var filter = Builders<Ticket>.Filter.Eq(t => t.Id, id); //poner t => t.isActive
             var result =  await _tickets.Find(filter).FirstOrDefaultAsync();
             return result;
         }
 
         public async Task<List<Ticket>> GetByIdUser(string idUser)
         {
-            var filter = Builders<Ticket>.Filter.Eq(t => t.IdUser, idUser);
+            var filter = Builders<Ticket>.Filter.Eq(t => t.IdUser, idUser); //poner t => t.isActive
             var result =  await _tickets.Find(filter).ToListAsync();
             return result;
         }
 
         public async Task<bool> Update(string id, Ticket ticket)
         {
-            var filter = Builders<Ticket>.Filter.Eq("_id", id);
+            var filter = Builders<Ticket>.Filter.Eq("_id", id); //poner t => t.isActive
 
             var combinedUpdate = Builders<Ticket>.Update.Combine(
                 Builders<Ticket>.Update.Set("Type", ticket.Type),

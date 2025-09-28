@@ -63,5 +63,46 @@ namespace perla_metro_ticket_service.src.Controller
 
             return Ok(tickets);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetTicket(string id)
+        {
+
+            var ticket = await _ticketRepository.GetById(id);
+
+            return Ok(ticket);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateTicket(string id, UpdateTicket updateTicket)
+        {
+            var ticket = await _ticketRepository.GetById(id);
+            if (ticket != null)
+            {
+                var ticketToUpdate = updateTicket.ToModel();
+                var result = await _ticketRepository.Update(id, ticketToUpdate);
+                if (result)
+                {
+                    return Ok("El ticket se actulizo exitosamente");
+                }
+                return BadRequest("No se pudo actualizar el ticket");
+            }
+            return BadRequest("El ticke no existe");
+            
+
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteTicket(string id)
+        {
+            
+            var result = await _ticketRepository.DeleteSoft(id);
+            if (result)
+            {
+                return Ok("El ticket se elimino exitosamente");
+            }
+            return BadRequest("No se pudo eliminar el ticket");
+
+        }
     }
 }
