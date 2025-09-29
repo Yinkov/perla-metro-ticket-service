@@ -113,8 +113,8 @@ warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]
       
 info: Microsoft.Hosting.Lifetime[0]
 
-ir a http://localhost:5192/swagger
-el numero puede variar
+ir a http://localhost:5050/swagger
+el puerto esta definido para que siempre sea el 5050
 
 
 
@@ -122,7 +122,7 @@ el numero puede variar
 
 Cuando el servicio esté corriendo, puedes acceder a Swagger en:
 
- https://localhost:**numero**/swagger
+ https://localhost:5050/swagger [esta definido para que siempre se 5050 para la conectividad con la main api]
 
 Ahí encontrarás los endpoints para:
 
@@ -151,6 +151,7 @@ Price siempre debe ser mayor a 0.
 Type solo acepta "Ida" o "Vuelta".
 
 State solo acepta "Activo", "Usado" o "Caducado".
+
 
 
 
