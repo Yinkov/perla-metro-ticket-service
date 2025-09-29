@@ -58,10 +58,10 @@ namespace perla_metro_ticket_service.src.Controller
         }
 
         [HttpGet("/GetAllTickets")]
-        public async Task<IActionResult> GetAllTicket()
+        public async Task<IActionResult> GetAllTicket([FromQuery] string? userId, [FromQuery] DateTime? fecha, [FromQuery] TicketState? state)
         {
 
-            var tickets = await _ticketRepository.GetAll();
+            var tickets = await _ticketRepository.GetAll(userId,fecha,state);
             if (tickets.Count == 0)
             {
                 return NotFound("No hay tickets actualmente");

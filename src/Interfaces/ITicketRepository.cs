@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using perla_metro_ticket_service.Models;
+using perla_metro_ticket_service.Models.Enums;
 using perla_metro_ticket_service.src.Dtos.Ticket;
 
 namespace perla_metro_ticket_service.src.Interfaces
@@ -10,7 +11,7 @@ namespace perla_metro_ticket_service.src.Interfaces
     public interface ITicketRepository
     {
         Task<Ticket> Add(Ticket ticket);
-        Task<List<Ticket>> GetAll();
+        Task<List<Ticket>> GetAll(string? userId, DateTime? fecha, TicketState? state);
         Task<Ticket> GetById(string id);
         Task<List<Ticket>> GetByIdUser(string idUser);
         Task<bool> Update(string id,UpdateTicket  ticket);

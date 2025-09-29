@@ -65,11 +65,33 @@ namespace perla_metro_ticket_service.src.Repositories
             return result.ModifiedCount > 0;
         }
 
-        public async Task<List<Ticket>> GetAll()
+        public async Task<List<Ticket>> GetAll(string? userId, DateTime? fecha, TicketState? state)
         {
-          
-            var result =  await _tickets.Find(t => t.isActive).ToListAsync(); 
-            return result;
+            var filters = new List<FilterDefinition<Ticket>>();
+            var builder = Builders<Ticket>.Filter;
+
+            // Siempre buscamos tickets activos
+            filters.Add(builder.Eq(t => t.isActive, true));
+
+            if (!string.IsNullOrEmpty(userId))
+            {
+                filters.Add(builder.Eq(t => t.IdUser, userId));
+            }
+
+            if (fecha.HasValue)
+            {
+                filters.Add(builder.Eq(t => t.issueDate, fecha.Value.Date)); 
+                // Nota: .Date asegura que no compare con la hora
+            }
+
+            if (state.HasValue)
+            {
+                filters.Add(builder.Eq(t => t.State, state.Value));
+            }
+
+            var filter = filters.Any() ? builder.And(filters) : builder.Empty;
+
+            return await _tickets.Find(filter).ToListAsync();
         }
 
         public async Task<Ticket> GetById(string id)
@@ -97,6 +119,8 @@ namespace perla_metro_ticket_service.src.Repositories
                 Builders<Ticket>.Filter.Eq(t => t.Id, id),
                 Builders<Ticket>.Filter.Eq(t => t.isActive, true)
             );
+
+
 
             var updates = new List<UpdateDefinition<Ticket>>();
 
