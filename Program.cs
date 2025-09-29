@@ -13,12 +13,11 @@ var builder = WebApplication.CreateBuilder(args);
 Env.Load();
 
 builder.Services
-    .AddControllers()
-    .AddJsonOptions(options =>
-    {
-        // Esto hace que ASP.NET acepte y serialice enums como string
-        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-    });
+.AddControllers()
+.AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+});
 
 var pack = new ConventionPack
 {

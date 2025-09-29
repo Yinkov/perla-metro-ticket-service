@@ -26,7 +26,7 @@ namespace perla_metro_ticket_service.src.Controller
 
 
         [HttpPost("/Add")]
-        public async Task<IActionResult> AddTicket([FromForm] AddTicketDto addTicketDto)
+        public async Task<IActionResult> AddTicket([FromBody] AddTicketDto addTicketDto)
         {
             try
             {
@@ -34,15 +34,7 @@ namespace perla_metro_ticket_service.src.Controller
                 {
                     return BadRequest(ModelState);
                 }
-                /* Preguntar al main api si existe el user
-                var userId = 
-                if (userId == null)
-                {
-                    return Unauthorized("Usuario no existe.");
-                }
-                */
-                // Validar modelo inicial
-
+   
 
                 var newTicket = addTicketDto.ToModel();
 
@@ -85,7 +77,7 @@ namespace perla_metro_ticket_service.src.Controller
         }
 
         [HttpPut("/Update/{id}")]
-        public async Task<IActionResult> UpdateTicket(string id,[FromForm] UpdateTicket updateTicket)
+        public async Task<IActionResult> UpdateTicket(string id,[FromBody] UpdateTicket updateTicket)
         {
             if (!ModelState.IsValid)
             {
